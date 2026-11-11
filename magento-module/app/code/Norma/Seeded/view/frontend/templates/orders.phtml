@@ -1,0 +1,14 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$collection = $objectManager->create(\Magento\Sales\Model\ResourceModel\Order\Collection::class);
+$collection->addFieldToFilter('customer_id', $_GET['customer_id']);
+?>
+<ul class="orders">
+<?php foreach ($collection as $order): ?>
+    <li class="<?= 'order-' . $order->getStatus() ?>" data-id="<?= $order->getId() ?>">
+        <a href="https://shop.example.com/sales/order/view/id/<?= $order->getId() ?>">
+            <?= $order->getIncrementId() ?>
+        </a>
+    </li>
+<?php endforeach; ?>
+</ul>
